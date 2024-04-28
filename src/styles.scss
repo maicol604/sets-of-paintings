@@ -1,0 +1,64 @@
+$primary: #81856b;
+$warm-color: #bf6b40;
+
+@font-face {
+    font-family: 'FranklinGothic';
+    src: url('./assets/OPTIFranklinGothic-Medium.otf') format('opentype');
+}
+
+* {
+    font-family: FranklinGothic;
+    font-weight: 400;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+    padding: .25rem 1rem;
+}
+
+button {
+    // transition: all .25; 
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.btn-primary {
+    text-transform: uppercase;
+    background-color:  $primary;
+    border: 1px solid $primary; 
+    color: #fff;
+    margin: .5rem 0;
+}
+
+.btn-primary:disabled {
+    background-color: #979797 !important;
+}
+
+.btn-secondary {
+    text-transform: uppercase;
+    border-radius: 0;
+    background: #fff;
+    border: 1px solid $primary;
+    color:  $primary;
+}
+
+.btn-warm {
+    text-transform: uppercase;
+    background-color:  $warm-color;
+    border: 1px solid $warm-color; 
+    color: #fff;
+    margin: .5rem 0;
+}
+
+@media print {
+    .sidebar-container, .content-wrapper .counter-list, button {
+        display: none;
+    }
+}

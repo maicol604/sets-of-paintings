@@ -1,0 +1,14 @@
+.paint-list-container {
+    box-sizing: border-box;
+    padding: 1rem;
+    max-height: 100vh;
+    overflow: auto;
+    padding-bottom: 30vh;
+    .img-list-item {
+        width: 100%;
+        transition: all .25s;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
