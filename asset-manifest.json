@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sets-of-paintings/static/css/main.0cf51d07.css",
-    "main.js": "/sets-of-paintings/static/js/main.85a1b891.js",
+    "main.css": "/sets-of-paintings/static/css/main.9e6f1d4a.css",
+    "main.js": "/sets-of-paintings/static/js/main.7b4b1693.js",
     "static/media/bg-welcome.jpg": "/sets-of-paintings/static/media/bg-welcome.87cb16d4d27b84ced1fc.jpg",
     "static/media/OPTIFranklinGothic-Medium.otf": "/sets-of-paintings/static/media/OPTIFranklinGothic-Medium.1fd28715b883ab99d425.otf",
     "index.html": "/sets-of-paintings/index.html",
-    "main.0cf51d07.css.map": "/sets-of-paintings/static/css/main.0cf51d07.css.map",
-    "main.85a1b891.js.map": "/sets-of-paintings/static/js/main.85a1b891.js.map"
+    "main.9e6f1d4a.css.map": "/sets-of-paintings/static/css/main.9e6f1d4a.css.map",
+    "main.7b4b1693.js.map": "/sets-of-paintings/static/js/main.7b4b1693.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cf51d07.css",
-    "static/js/main.85a1b891.js"
+    "static/css/main.9e6f1d4a.css",
+    "static/js/main.7b4b1693.js"
   ]
 }
