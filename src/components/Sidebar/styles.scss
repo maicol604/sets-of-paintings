@@ -25,12 +25,15 @@ $main-color: #81856b;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
         box-sizing: border-box;
         .logo-container {
             width: 100%;
             display: flex;
             justify-content: center;
+            img {
+                width: 100%;
+            }
         }
     }
 }

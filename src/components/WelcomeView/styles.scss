@@ -16,12 +16,15 @@ $secondary-color: #000;
              display: flex;
              justify-content: center;
              align-items: center;
-             padding: 1rem 2rem;
+             padding: 1rem 1rem;
              box-sizing: border-box;
              .logo-container {
                  width: 100%;
                  display: flex;
                  justify-content: center;
+                 img {
+                     width: 100%;
+                 }
              }
          }
         .counter-item {
@@ -85,7 +88,7 @@ $secondary-color: #000;
                 }
                 .text {
                     padding: 1rem 0;
-                    font-size: .75rem;
+                    // font-size: .75rem;
                     box-sizing: border-box;
                     text-align: center;
                 }

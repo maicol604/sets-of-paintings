@@ -37,6 +37,7 @@ $main-color: #81856b;
         }
         &:hover {
             // background-color: #000;
+            box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, .5);
             img {
                 opacity: .25;
             }
@@ -51,6 +52,6 @@ $main-color: #81856b;
         // -webkit-box-shadow: 0px 0px 10px 15px rgba(0,0,0,0.5);
         // -moz-box-shadow: 0px 0px 10px 15px rgba(0,0,0,0.5);
         // box-shadow: 0px 0px 10px 15px rgba(0,0,0,0.5);
-        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .5);
+        box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, .5);
     }
 }

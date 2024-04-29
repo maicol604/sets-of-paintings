@@ -113,6 +113,11 @@ const Sidebar = (props) => {
             Atrás
           </button>
         }
+        {currentStep===0 &&
+          <button className=' btn-secondary' style={{visibility:'hidden'}}>
+            Atrás
+          </button>
+        }
       </div>
     </div>
   );
