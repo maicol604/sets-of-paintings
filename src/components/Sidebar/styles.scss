@@ -38,7 +38,7 @@ $main-color: #81856b;
             display: flex;
             justify-content: center;
             img {
-                width: 100%;
+                // width: 100%;
             }
         }
     }
@@ -49,6 +49,13 @@ $main-color: #81856b;
 }
 
 @media (max-width: 992px) {
+    .sidebar-header {
+        .logo-container {
+            img {
+                height: 2.5rem;
+            }
+        }
+    }
     .step-control {
         padding: 0 !important;
         width: 100% !important;

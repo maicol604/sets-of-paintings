@@ -8,6 +8,8 @@ import WelcomeView from './components/WelcomeView';
 
 import videoFile from './assets/rotate-smartphone-to-portrait-5554091-4635011.mp4';
 
+const baseAPI = 'https://simulador.unmetrocuadrado.com.ar/wp/wp-json/custom/v1/post-types';
+
 function App() {
 
   const videoRef = useRef();
@@ -17,8 +19,8 @@ function App() {
   const [landscape, setLandscape] = useState(false);
 
   useEffect(()=>{
-    // console.log("get data")
-    fetch('https://simulador.unmetrocuadrado.com.ar/wp/wp-json/custom/v1/post-types')
+    // call to API
+    fetch(baseAPI)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
