@@ -80,7 +80,7 @@ const Sidebar = (props) => {
           <img src={logo} alt="Logo"/>
         </div>
       </div>
-      <div>
+      <div className='sidebar-content'>
           {renderStepContent()}
       </div>
       <div className='step-control'>

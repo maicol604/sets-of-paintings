@@ -1,11 +1,11 @@
 $main-color: #81856b;
 .sets-container {
-    box-sizing: border-box;
     padding: 1rem;
-    max-height: 100vh;
-    overflow: auto;
-    padding-bottom: 30vh;
+    height: calc(75vh - 2rem);
     z-index: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
     .item-price {
         font-size: .75rem;
     }
@@ -97,6 +97,16 @@ $main-color: #81856b;
         .check {
             opacity: 1 !important;
         }
+    }
+}
+
+@media (max-width: 992px) {
+    .set-card-title {
+        font-size: .75rem;
+        font-weight: 300 !important;
+    }
+    .item-price {
+        font-size: .5rem !important;
     }
 }
 

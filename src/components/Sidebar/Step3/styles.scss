@@ -1,9 +1,10 @@
 .paint-list-container {
-    box-sizing: border-box;
     padding: 1rem;
-    max-height: 100vh;
-    overflow: auto;
-    padding-bottom: 30vh;
+    height: calc(75vh - 2rem);
+    z-index: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
     .img-list-item {
         width: 100%;
         transition: all .25s;

@@ -3,19 +3,38 @@ $warm-color: #bf6b40;
 .end-step-sidebar {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 1rem;
-    justify-content: center;
     padding: 1rem;
     padding-top: 0;
-    // width: 30vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(75vh - 4em);
+    // align-items: center;
+    // justify-content: center;
+    > div {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     p {
         text-align: center;
+    }
+    .steps-to-finish ol.myriadregular li, .steps-to-finish .myriadregular li span{
+        font-family: 'myriadregular' !important;
+    }
+    ol {
+        margin-top: 0;
+        padding-top: 0 !important;
     }
     h2 {
         color: $warm-color;
         padding: 0;
         margin: 0;
+    }
+    .recoleta {
+        font-family: 'Recoleta' !important;
     }
     .steps-to-finish {
         border: 1px solid #000;
@@ -39,8 +58,36 @@ $warm-color: #bf6b40;
     a {
         border-bottom: 1px solid $warm-color;
         font-size: .75rem;
-        text-wrap: nowrap;
+        // text-wrap: nowrap;
         text-decoration: none;
         color: #000;
+        text-align: center;
+    }
+}
+
+@media (max-width: 992px) {
+    h2 {
+        font-size: 1rem;
+    }
+    p {
+        font-size: .75rem;
+    }
+    .steps-to-finish {
+        padding: 0 .5rem 0 .5rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        h3 {
+            font-size: .75rem;
+        }
+        ol {
+            li {
+                font-size: .75rem;
+                span {
+                }
+            }
+        }
+    }
+    a { 
+        font-size: .75rem !important;
     }
 }

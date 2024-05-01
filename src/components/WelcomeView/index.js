@@ -76,31 +76,25 @@ const WelcomeView = (props) => {
                 </div>
             </div>
             <div className='content-wrapper'>
-                <Grid container>
-                    <Grid item xs={12} style={{height:"fit-content"}}>
-                        <div className='counter-list'> 
-                            <h2>SIMULADOR DE CUADROS: Crea tu propio set!</h2>
+                <div className='counter-list'> 
+                    <h2>SIMULADOR DE CUADROS: Crea tu propio set!</h2>
+                </div>
+                <div className="content-container" style={{backgroundImage:`url(${bg})`, backgroundSize:'cover', backgroundPosition:'center'}}>
+                    <div className="banner">
+                        <div className="title-square">
+                            PASO A PASO
                         </div>
-                    </Grid>
-                    <Grid item xs={12} style={{height:"100%"}}>
-                        <div className="content-container" style={{backgroundImage:`url(${bg})`, backgroundSize:'cover', backgroundPosition:'center'}}>
-                            <div className="banner">
-                                <div className="title-square">
-                                    PASO A PASO
-                                </div>
-                                <div className="title-cursive">
-                                    Crea el set de tus sueños!
-                                </div>
-                                <div className="text">
-                                    Sigue las instrucciones para crear tu set, eligiendo primero la cantidad de cuadros y medidas que se adapten a tus espacios y luego los diseños que más te gusten.
-                                </div>
-                                <button className="main-action-btn" onClick={handleClick}>
-                                    EMPEZAR
-                                </button>
-                            </div>
+                        <div className="title-cursive">
+                            Crea el set de tus sueños!
                         </div>
-                    </Grid>
-                </Grid>
+                        <div className="text">
+                            Sigue las instrucciones para crear tu set, eligiendo primero la cantidad de cuadros y medidas que se adapten a tus espacios y luego los diseños que más te gusten.
+                        </div>
+                        <button className="main-action-btn" onClick={handleClick}>
+                            EMPEZAR
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )

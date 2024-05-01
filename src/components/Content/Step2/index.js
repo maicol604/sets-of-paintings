@@ -11,7 +11,7 @@ function Step2() {
     <div className='enviroment-set'>
       {
         store.enviroment &&
-        <ImageLoader src={store.enviroment.images[store.enviroment.indexSelected]} alt=""/>
+        <img src={store.enviroment.images[store.enviroment.indexSelected]} alt=""/>
       }
       {
         store.set &&

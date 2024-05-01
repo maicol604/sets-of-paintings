@@ -10,27 +10,16 @@ function Step1() {
   const store = useAppContext();
   const [enviroments, setEnviroments] = useState([]);
 
-  // const enviroments = [
-  //   {
-  //     id:0,
-  //     images:["https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/living1.jpg","https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/living2.jpg","https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/living3.jpg"],
-  //     colors:["red","blue","orange"]
-  //   },
-  //   {
-  //     id:1,
-  //     images:["https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/cama3.jpg","https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/cama2.jpg","https://simulador.unmetrocuadrado.com.ar/wp-content/uploads/2024/02/cama1.jpg"],
-  //     colors:["purple","yellow","green"]
-  //   }
-  // ]
-
   useEffect(()=>{
     if(store.data) {
       let enviromentsAux = store.data.environments.map((item)=>({colors: [item.bg_color_1,item.bg_color_2,item.bg_color_3],images:[item.bg1,item.bg2,item.bg3],...item}));
       // console.log(store.enviroment);
       if(store.enviroment) {
         setEnviromentSelected(store.enviroment);
+      } else {
+        handleEnviroment({...enviromentsAux[0], indexSelected: 0})
       }
-      setEnviroments(enviromentsAux);
+      setEnviroments([...enviromentsAux]);
     }
   },[store.data])
 
@@ -41,7 +30,7 @@ function Step1() {
   }
 
   return (
-    <>
+    <div className='env-container'>
       {
         enviroments.map((enviroment, enviromentIndex)=>(
           <div className={'enviroment-card '+((enviromentSelected && enviromentSelected.id===enviroment.id)?"enviroment-active":"")} key={enviromentIndex}>
@@ -68,7 +57,7 @@ function Step1() {
           </div>
         ))
       }
-    </>
+    </div>
   );
 }
 

@@ -2,6 +2,9 @@ $main-color: #81856b;
 $secondary-color: #000;
 .welcome-view-container {
     display: flex;
+    .recoleta {
+        font-family: 'Recoleta' !important;
+    }
     .sidebar {
         max-width: 25%;
         width: 25%;
@@ -58,10 +61,14 @@ $secondary-color: #000;
         }
     }
     .content-wrapper {
+        // .counter-list {
+        //     height: 10vh;
+        // }
         .content-container {
-            height: calc(100vh);
+            height: calc(90vh);
             display: flex;
             justify-content: center;
+            align-items: center;
             // background-color: orange;
             .banner {
                 width: 60%;
@@ -73,7 +80,6 @@ $secondary-color: #000;
                 align-items: center;
                 padding: 2rem 2rem;
                 box-sizing: border-box;
-                margin-top: 10rem;
                 flex: 0 0 auto;
                 height: fit-content;
                 .title-square {
@@ -103,6 +109,46 @@ $secondary-color: #000;
                 .main-action-btn:hover {
                     background-color: #81856b;
                     color: #fff;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 992px) { 
+    .welcome-view-container {
+        .sidebar {
+            > .content {
+                margin-top: 0;
+                margin-left: 2rem;
+                align-items: flex-start;
+                .counter-item {
+                    flex-direction: row !important;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 !important;
+                    margin: 0;
+                    width: fit-content;
+                    .counter-item-icon {
+                        padding: 0;
+                        margin-right: .5rem;
+                        width: 2rem;
+                        flex: 0 0 auto;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .content *{
+                        font-size: .75rem;
+                    }
+                    padding: 0;
+                }
+            }
+        }
+        .content-wrapper {
+            .content-container {
+                .banner { 
+                    padding: 1rem;
+                    width: 70%;
                 }
             }
         }

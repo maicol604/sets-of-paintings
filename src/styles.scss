@@ -6,6 +6,16 @@ $warm-color: #bf6b40;
     src: url('./assets/OPTIFranklinGothic-Medium.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'myriadregular';
+    src: url('./assets/myriadregular.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./assets/Recoleta-RegularDEMO.otf') format('opentype');
+}
+
 * {
     font-family: FranklinGothic;
     font-weight: 400;
@@ -60,5 +70,22 @@ button {
 @media print {
     .sidebar-container, .content-wrapper .counter-list, button {
         display: none;
+    }
+}
+
+.landscape-messaje-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: #fff;
+    video {
+        height: 50%;
+        transform: rotate(90deg);
     }
 }

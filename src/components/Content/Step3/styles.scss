@@ -1,8 +1,13 @@
 $main-color: #81856b;
 .editor-container{
     position: relative;
+    width: 100%;
+    // height: 100%;
+    object-fit: contain;
     img {
         width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
     .enviroment {
         position: relative;

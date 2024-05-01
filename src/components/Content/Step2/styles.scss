@@ -1,12 +1,21 @@
 .enviroment-set {
     position: relative;
+    height: 100%;
+    object-fit: contain;
     img {
         position: relative;
         width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
     img:nth-child(2) {
         position: absolute;
         left: 0;
         top: 0;
+    }   
+}
+@media (max-width: 992px) {
+    .content-wrapper .center-center {
+        align-items: flex-start !important;
     }   
 }
