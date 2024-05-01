@@ -30,7 +30,7 @@ function Step1() {
             <li><span>Listo! Ya comenzamos a preparar tus cuadros</span></li>
           </ol>  
         </div>
-        <a href='#'>VOLVER A LA TIENDA ONLINE PARA TERMINAR LA COMPRA</a>
+        <a href='https://www.unmetrocuadrado.com.ar/set-de-cuadros/cuadros-eleccion/' target="_blank">VOLVER A LA TIENDA ONLINE PARA TERMINAR LA COMPRA</a>
         <button className="btn-warm" onClick={handleDownload}>DESCARGAR MI SET</button>
       </div>
     </div>
