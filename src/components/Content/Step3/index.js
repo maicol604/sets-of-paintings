@@ -16,7 +16,6 @@ const Step3 = () => {
       let aux = [];
 
       coordinatesAux.forEach((coordString, index) => {
-        // Eliminar paréntesis sobrantes
         coordString = coordString.replace("(", "").replace(")", "");
         const coord = coordString.split(",");
         const top = parseFloat(coord[1])+"%";
@@ -30,7 +29,6 @@ const Step3 = () => {
   }, [store.set.coordinates, store.paints]);
 
   useEffect(() => {
-    // console.log("number", store.set.items_count)
     if(mounted) {
       if(store.set.items_count === paintSelected+1){
         setPaintSelected(0);
@@ -40,8 +38,12 @@ const Step3 = () => {
         store.setPaintSelected(paintSelected+1);
       }
     }
-    if(!mounted)
+    if(!mounted) {
       setMounted(true);
+      // console.log(paintSelected)
+      store.setPaintSelected(0);
+      setPaintSelected(0);
+    }
   }, [store.paints]);
 
   const handlePaint = (index) => {
@@ -51,7 +53,6 @@ const Step3 = () => {
 
   const findPaint = (index) => {
     for(let i=0;i<store.paints.length;i++) {
-      // console.log(store.paints[i],index)
       if(store.paints[i].paintIndex===index){
         return (store.paints[i]);
       }
