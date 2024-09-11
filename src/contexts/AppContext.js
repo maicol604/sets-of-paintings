@@ -12,6 +12,8 @@ export const AppProvider = ({ children }) => {
   const [paints, setPaints] = useState([]);
   const [paintSelected, setPaintSelected] = useState(0);
   const [data, setData] = useState(null);
+  const [downloadTrigger, setDownloadTrigger] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const reset = () => {
     // setData(null)
@@ -35,7 +37,11 @@ export const AppProvider = ({ children }) => {
     setPaints,
     paintSelected,
     setPaintSelected,
-    reset
+    reset,
+    setDownloadTrigger,
+    downloadTrigger,
+    setLoading,
+    loading,
   };
 
   return (

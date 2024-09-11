@@ -17,6 +17,7 @@ function App() {
   const [data, setData] = useState(null);
   const [step, setStep] = useState(-1);
   const [landscape, setLandscape] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     // call to API
@@ -29,6 +30,7 @@ function App() {
     })
     .then(data => {
       setData(data);
+      setLoading(false)
     })
     .catch(error => {
       console.error('Hubo un problema con la solicitud fetch:', error);
@@ -89,6 +91,7 @@ function App() {
         :
         <WelcomeView
           onChangeStep={handleStepChange}
+          loading={loading}
         />
       }
     </AppProvider>

@@ -9,6 +9,7 @@ import blackPaint from '../../assets/imagen_negro.png';
 import blackDownload from '../../assets/descarga_negro.png';
 
 import bg from '../../assets/bg-welcome.jpg';
+import Loader from "../Loader";
 
 const WelcomeView = (props) => {
 
@@ -90,9 +91,14 @@ const WelcomeView = (props) => {
                         <div className="text">
                             Sigue las instrucciones para crear tu set, eligiendo primero la cantidad de cuadros y medidas que se adapten a tus espacios y luego los diseños que más te gusten.
                         </div>
-                        <button className="main-action-btn" onClick={handleClick}>
+                        {props.loading 
+                        ? 
+                        <div><span className="loader"></span></div>
+                        :
+                        <button className="main-action-btn" onClick={handleClick} disabled={props.loading}>
                             EMPEZAR
                         </button>
+                        }
                     </div>
                 </div>
             </div>

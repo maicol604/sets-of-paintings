@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppContext } from '../../../contexts/AppContext';
 import './styles.scss';
 
-function Step1() {
+function Step4({ download }) {
 
-  // const store = useAppContext();
+  const store = useAppContext();
 
   // console.log(store);
 
+  // useEffect(()=>{console.log(store.set.url.url)},[])
+
   const handleDownload = () => {
-    window.print();
+    // window.print();
+    store.setDownloadTrigger(prev => !prev);
+    // console.log(store)
   };
 
   return (
@@ -30,11 +34,12 @@ function Step1() {
             <li><span>Listo! Ya comenzamos a preparar tus cuadros</span></li>
           </ol>  
         </div>
-        <a href='https://www.unmetrocuadrado.com.ar/set-de-cuadros/cuadros-eleccion/' target="_blank">VOLVER A LA TIENDA ONLINE PARA TERMINAR LA COMPRA</a>
+        <a href={store.set.url.url} target="_blank">VOLVER A LA TIENDA ONLINE PARA TERMINAR LA COMPRA</a>
         <button className="btn-warm" onClick={handleDownload}>DESCARGAR MI SET</button>
       </div>
     </div>
   );
 }
 
-export default Step1;
+export default Step4;
+ 

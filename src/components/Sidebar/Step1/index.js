@@ -33,7 +33,7 @@ function Step1() {
     <div className='env-container'>
       {
         enviroments.map((enviroment, enviromentIndex)=>(
-          <div className={'enviroment-card '+((enviromentSelected && enviromentSelected.id===enviroment.id)?"enviroment-active":"")} key={enviromentIndex}>
+          <div className={'enviroment-card '+((enviromentSelected && enviromentSelected.id===enviroment.id)?"enviroment-active":"")} key={enviromentIndex+"-env"}>
             <div className='image-color-list-container'>
               <ul className='image-color-list'>
                 {

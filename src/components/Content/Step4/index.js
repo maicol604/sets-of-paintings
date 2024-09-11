@@ -3,8 +3,11 @@ import { useAppContext } from '../../../contexts/AppContext';
 import './styles.scss';
 import ImageLoader from '../../ImageLoader';
 
+import { useScreenshot, createFileName } from 'use-react-screenshot';
+
 function Step1() {
   const [paintSelected, setPaintSelected] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const store = useAppContext();
 
@@ -28,6 +31,9 @@ function Step1() {
         aux.push({top,left,width,height});
       });
       setCoordinates([...aux]);
+      setTimeout(()=>{
+        setLoading(false)
+      }, 2000);
   },[]);
 
   const findPaint = (index) => {
@@ -39,6 +45,23 @@ function Step1() {
     }
     return null;
   }
+
+  const [image, takeScreenShot] = useScreenshot()
+  const download = (image, { name = "img", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
+
+  useEffect(()=>{
+    if(!loading)
+      downloadScreenshot();
+    // console.log(store.downloadTrigger)
+  },[store.downloadTrigger])
+
 
   return (
     <div className="final-image-container">
@@ -67,8 +90,9 @@ function Step1() {
           <img className='set' src={store.set.images[store.set.indexSelected]} alt=""/>
         }
       </div>
-      <div style={{display: 'flex', flexDirection:'column'}}>
-        ELEGISTE: {store.set.title} con marco {store.set.type[store.set.indexSelected]}
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        ELEGISTE: {store.set.title} con marco {store.set.type[store.set.indexSelected]} 
+        <button className='btn-warm' style={{marginLeft: '1rem'}} onClick={()=>{window.open(store.set.url.url,'_blank');}}>COMPRAR SET</button>
       </div>
     </div>
   );

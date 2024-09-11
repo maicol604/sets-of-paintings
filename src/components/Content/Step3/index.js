@@ -6,11 +6,10 @@ import ImageLoader from '../../ImageLoader';
 
 const Step3 = () => {
 
-  const [paintSelected, setPaintSelected] = useState(null);
-
+  const [paintSelected, setPaintSelected] = useState(0);
   const store = useAppContext();
-
   const [coordinatesParm, setCoordinates] = useState([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
       const coordinatesAux = store.set.coordinates.split("),("); 
@@ -29,6 +28,21 @@ const Step3 = () => {
       });
       setCoordinates([...aux]);
   }, [store.set.coordinates, store.paints]);
+
+  useEffect(() => {
+    // console.log("number", store.set.items_count)
+    if(mounted) {
+      if(store.set.items_count === paintSelected+1){
+        setPaintSelected(0);
+        store.setPaintSelected(0);
+      } else {
+        setPaintSelected(paintSelected+1);
+        store.setPaintSelected(paintSelected+1);
+      }
+    }
+    if(!mounted)
+      setMounted(true);
+  }, [store.paints]);
 
   const handlePaint = (index) => {
     setPaintSelected(index);

@@ -1,0 +1,18 @@
+.heart-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    padding: .15rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    cursor: pointer;
+    svg {
+        transition: all .25s;
+        width: 100%;
+    }
+}
