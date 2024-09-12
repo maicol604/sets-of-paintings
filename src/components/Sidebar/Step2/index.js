@@ -64,7 +64,7 @@ function Step2() {
                           style={{backgroundColor: item.color}} 
                         >
                         </div>
-                        <span className='item-price'>{`$${item.price}`}</span>
+                        <span className='item-price'>{`${item.price}`}</span>
                       </li>
                     ))
                   }
