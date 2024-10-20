@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './styles.scss';
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import { useAppContext } from '../../../contexts/AppContext';
@@ -9,6 +9,8 @@ function Step2() {
   const [enviromentSelected, setEnviromentSelected] = useState(null);
   const [enviroments, setEnviroments] = useState([]);
   const store = useAppContext();
+  const [loading, setLoading] = useState(false);
+  const loadMoreButtonRef = useRef(null); // Ref al botón "Cargar más"
 
   useEffect(()=>{
     if(store.data) {
@@ -25,21 +27,63 @@ function Step2() {
           ...item
         }
       ));
-      // console.log(setssAux);
-      // console.log(store.set)
       if(store.set) {
         setEnviromentSelected(store.set);
       }
       setEnviroments(setssAux);
     }
-  },[store.data])
+  },[store.data]);
 
   const handleEnviroment = (env) => {
-    // console.log(env)
     setEnviromentSelected(env);
     store.setSet(env);
     store.setPaints([]);
-  }
+  };
+
+  const nextSetsPage = (page) => {
+    setLoading(true);
+    fetch(`${store.baseAPI}/sets?page=${store.setsPage+1}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(newData => {
+      store.setSetsPage(prev=>(prev+1));
+      store.setData({
+        ...store.data,
+        sets: [...store.data.sets, ...newData.data],
+        setsMeta: newData
+      });
+      setLoading(false);
+    })
+    .catch(error => {
+      setLoading(false);
+      console.error('Hubo un problema con la solicitud fetch:', error);
+    });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading) {
+          nextSetsPage(); // Llama a nextSetsPage cuando el botón es visible
+        }
+      },
+      { threshold: 1.0 } // Se dispara cuando el botón es completamente visible
+    );
+
+    if (loadMoreButtonRef.current) {
+      observer.observe(loadMoreButtonRef.current);
+    }
+
+    return () => {
+      if (loadMoreButtonRef.current) {
+        observer.unobserve(loadMoreButtonRef.current);
+      }
+    };
+  }, [loading, store.setsPage]);
 
   return (
     <div className='sets-container'>
@@ -81,6 +125,12 @@ function Step2() {
 
           </div>
         ))
+      }
+      
+      {store.data && (store.data.setsMeta.total_pages > store.setsPage) &&
+        <h3 ref={loadMoreButtonRef} onClick={nextSetsPage} className='loadMore' disabled={loading}>
+          {loading ? 'Cargando...' : 'Cargar más'}
+        </h3>
       }
     </div>
   );

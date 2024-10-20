@@ -14,6 +14,10 @@ export const AppProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [downloadTrigger, setDownloadTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
+  const baseAPI = 'https://simulador.unmetrocuadrado.com.ar/wp/wp-json/custom/v1/post-types';
+  const [enviromentsPage, setEnviromentsPage] = useState(1);
+  const [setsPage, setSetsPage] = useState(1);
+  const [paintingsPage, setPaintingsPage] = useState(1);
 
   const reset = () => {
     // setData(null)
@@ -42,6 +46,13 @@ export const AppProvider = ({ children }) => {
     downloadTrigger,
     setLoading,
     loading,
+    baseAPI,
+    enviromentsPage,
+    setEnviromentsPage,
+    setsPage,
+    setSetsPage,
+    paintingsPage,
+    setPaintingsPage
   };
 
   return (

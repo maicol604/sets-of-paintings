@@ -9,6 +9,7 @@ function Step1() {
   const [enviromentSelected, setEnviromentSelected] = useState(null);
   const store = useAppContext();
   const [enviroments, setEnviroments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     if(store.data) {
@@ -28,6 +29,31 @@ function Step1() {
     store.setEnviroment(env);
     // console.log(env)
   }
+
+  const nextEnvironmentsPage = (page) => {
+    setLoading(true);
+    fetch(`${store.baseAPI}/paintings?page=${store.enviromentsPage+1}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(newData => {
+      store.setEnviromentsPage(prev=>(prev+1));
+      store.setData({
+        ...store.data,
+        environments: [...store.data.environments, ...newData.data],
+        environmentsMeta: newData
+      })
+      setLoading(false);
+    })
+    .catch(error => {
+      setLoading(false);
+      console.error('Hubo un problema con la solicitud fetch:', error);
+    });
+  }
+  
 
   return (
     <div className='env-container'>
@@ -56,6 +82,11 @@ function Step1() {
             </div>
           </div>
         ))
+      }
+      {store.data && (store.data.environmentsMeta.total_pages>store.enviromentsPage) &&
+        <h3 onClick={nextEnvironmentsPage} className='loadMore' disabled={loading}>
+          {loading ? 'Cargando...' : 'Cargar más'}
+        </h3>
       }
     </div>
   );

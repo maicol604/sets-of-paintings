@@ -90,3 +90,12 @@ button {
         transform: rotate(90deg);
     }
 }
+.loadMore {
+    border-radius: 0;
+    border: none;
+    color: $primary;
+    padding: .5rem 1rem;
+    &:disabled {
+        opacity: .5;
+    }
+}

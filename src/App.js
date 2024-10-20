@@ -20,16 +20,30 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
+    const urls = [
+      `${baseAPI}/environments?page=1`,
+      `${baseAPI}/sets?page=1`,
+      `${baseAPI}/paintings?page=1`
+    ]
     // call to API
-    fetch(baseAPI)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
+    Promise.all(urls.map(url => fetch(url).then(res => res.json())))
+    // .then(response => {
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //   }
+    //   return response.json();
+    // })
     .then(data => {
-      setData(data);
+      console.log(data)
+      setData({
+        environments: data[0].data,
+        sets: data[1].data,
+        paintings: data[2].data,
+        environmentsMeta: data[0],
+        setsMeta: data[1],
+        paintingsMeta: data[2],
+      })
+      // setData(data);
       setLoading(false)
     })
     .catch(error => {
@@ -85,7 +99,13 @@ function App() {
       {
         step!==-1 ?
         <div style={{ display: 'flex' }}>
-          <Sidebar onChangeStep={handleStepChange} data={data}/> 
+          <Sidebar 
+            onChangeStep={handleStepChange} 
+            data={data}
+            // nextEnvironmentsPage={(page)=>nextEnvironmentsPage(page)}
+            // nextSetsPage={(page)=>nextSetsPage(page)}
+            // nextPaintingsPage={(page)=>nextPaintingsPage(page)}
+          /> 
           <Content />
         </div>
         :
