@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sets-of-paintings/static/css/main.df2e60b2.css",
-    "main.js": "/sets-of-paintings/static/js/main.17ec7cde.js",
+    "main.js": "/sets-of-paintings/static/js/main.7e9c1e3a.js",
     "static/media/Recoleta-RegularDEMO.otf": "/sets-of-paintings/static/media/Recoleta-RegularDEMO.fd9bfd35d1085b5c6511.otf",
     "static/media/bg-welcome.jpg": "/sets-of-paintings/static/media/bg-welcome.87cb16d4d27b84ced1fc.jpg",
     "static/media/myriadregular.ttf": "/sets-of-paintings/static/media/myriadregular.87a3fb79e645ea430ebf.ttf",
@@ -9,10 +9,10 @@
     "static/media/rotate-smartphone-to-portrait-5554091-4635011.mp4": "/sets-of-paintings/static/media/rotate-smartphone-to-portrait-5554091-4635011.c497859c80ab4a845197.mp4",
     "index.html": "/sets-of-paintings/index.html",
     "main.df2e60b2.css.map": "/sets-of-paintings/static/css/main.df2e60b2.css.map",
-    "main.17ec7cde.js.map": "/sets-of-paintings/static/js/main.17ec7cde.js.map"
+    "main.7e9c1e3a.js.map": "/sets-of-paintings/static/js/main.7e9c1e3a.js.map"
   },
   "entrypoints": [
     "static/css/main.df2e60b2.css",
-    "static/js/main.17ec7cde.js"
+    "static/js/main.7e9c1e3a.js"
   ]
 }
