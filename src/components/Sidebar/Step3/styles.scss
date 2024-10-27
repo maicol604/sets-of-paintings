@@ -47,6 +47,10 @@
             }
         }
     }
+    .category-select {
+        background-color: transparent;
+        border: none;
+    }
 }
 @media (max-width: 992px) {
     .paint-list-container {
@@ -62,5 +66,9 @@
             font-size: .4rem !important;
             white-space: nowrap;
         }
+    }
+    .category-select {
+        font-size: .4rem !important;
+        white-space: nowrap;
     }
 }

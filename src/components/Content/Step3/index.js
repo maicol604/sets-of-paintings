@@ -78,7 +78,7 @@ const Step3 = () => {
             <div className={"set-item "+((index===paintSelected)?"set-item-active":"")} style={{top: item.top, left: item.left, width: item.width, height: item.height}} key={index} onClick={()=>handlePaint(index)}>
               {
                 findPaint(index)?
-                <img className='painting' src={paint.img.src}/>
+                <img className='painting' src={paint.img.image}/>
                 :
                 <></>
               }

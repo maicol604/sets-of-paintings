@@ -27,6 +27,7 @@ const Sidebar = (props) => {
   useEffect(()=>{
     if(props.data){
       store.setData(props.data);
+      store.setCategories(Object.values(props.data.categories));
     }
   },[props.data])
   useEffect(()=>{

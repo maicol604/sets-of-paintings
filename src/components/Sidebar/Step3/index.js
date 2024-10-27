@@ -9,10 +9,14 @@ function Step3() {
 
   const store = useAppContext();
   const [images, setImages] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [option, setOption] = useState(0);
   const [loading, setLoading] = useState(false);
   const loadMoreButtonRef = useRef(null); // Ref para el botón "Cargar más"
+  const [paintsByCategory, setPaintsByCategory] = useState([]);
+  const [paintsByCategoryPage, setPaintsByCategoryPage] = useState(1);
+  const [paintsByCategoryData, setPaintsByCategoryData] = useState(null);
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -41,6 +45,9 @@ function Step3() {
       ));
       if(store.paints) {
         setImages(store.paints)
+      }
+      if(store.categories){
+        setCategories(store.categories)
       }
       setImages(imagesAux);
     }
@@ -108,11 +115,40 @@ function Step3() {
     });
   };
 
+  const getPaintsByCategory = (category, page) => {
+    setLoading(true);
+    let aux = [];
+    if(page>1) {
+      aux = [...paintsByCategory];
+    }
+    fetch(`${store.baseAPI}/paintings?page=${page}&category=${category}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(newData => {
+      const newPaints = [...aux, ...newData.data];
+      setPaintsByCategory(newPaints);
+      setPaintsByCategoryPage(prev => (prev+1));
+      setLoading(false);
+      setPaintsByCategoryData(newData);
+    })
+    .catch(error => {
+      console.error('Hubo un problema con la solicitud fetch:', error);
+      setLoading(false);
+    });
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !loading) {
-          nextPaintingsPage(); // Llama a nextPaintingsPage cuando el botón es visible
+          if(option!==2)
+            nextPaintingsPage(); // Llama a nextPaintingsPage cuando el botón es visible
+          else
+            getPaintsByCategory(selectedOption, paintsByCategoryPage)
         }
       },
       { threshold: 1.0 } // Se dispara cuando el botón es completamente visible
@@ -129,17 +165,44 @@ function Step3() {
     };
   }, [loading, store.paintingsPage]);
 
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setPaintsByCategory([]);
+    setPaintsByCategoryPage(0);
+    getPaintsByCategory(value, 1)
+    setSelectedOption(value);
+    setOption(2);
+  };
+
   return (
     <div className='paint-list-container'>
       <div className='paints-header'>
         <div onClick={() => setOption(0)}>TODOS</div>
         <div onClick={() => setOption(1)}>FAVORITOS {`(${favorites.length})`}</div>
-        <div>CATEGORÍAS</div>
+        <div>
+            {/* <label id="dropdown-label">CATEGORÍAS</label> */}
+            <select
+              value={selectedOption}
+              onChange={handleChange}
+              className='category-select'
+            >
+              <option value={null}>Todas</option>
+              {
+                categories.map((item)=>{
+                  return (
+                    <option value={item.slug} key={item.id}>{item.name}</option>
+                  )
+                })
+              }
+            </select>
+        </div>
       </div>
       <Grid container spacing={2}>
         {
           option === 0 
-          ?
+          &&
           <>
             {images.map((image, index) => (
               <Grid item xs={4} key={index}>
@@ -147,12 +210,15 @@ function Step3() {
                   <span className='favorites-container' onClick={() => handleFavorites(image)}>
                     <Heart active={isFavorite(image.id)} />
                   </span>
-                  <ImageLoader className='img-list-item' src={image.src} alt="" onClick={() => handlePaint(image)} />
+                  <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
                 </div>
               </Grid>
             ))}
           </>
-          :
+        }
+        {
+          option === 1 
+          &&
           <>
             {images.map((image, index) => (
               isFavorite(image.id) ?
@@ -161,16 +227,39 @@ function Step3() {
                   <span className='favorites-container' onClick={() => handleFavorites(image)}>
                     <Heart active={isFavorite(image.id)} />
                   </span>
-                  <ImageLoader className='img-list-item' src={image.src} alt="" onClick={() => handlePaint(image)} />
+                  <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
                 </div>
               </Grid>
               : null
             ))}
           </>
         }
+        {
+          option === 2
+          &&
+          <>
+            {paintsByCategory.map((image, index) => (
+              <Grid item xs={4} key={index}>
+                <div className='paint-wrapper'>
+                  <span className='favorites-container' onClick={() => handleFavorites(image)}>
+                    <Heart active={isFavorite(image.id)} />
+                  </span>
+                  <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
+                </div>
+              </Grid>
+            ))}
+          </>
+        }
       </Grid>
-      {store.data && (store.data.paintingsMeta.total_pages > store.paintingsPage) &&
+      {option!==2 &&
+      store.data && (store.data.paintingsMeta.total_pages >= store.paintingsPage) &&
         <h3 ref={loadMoreButtonRef} onClick={nextPaintingsPage} className='loadMore' disabled={loading}>
+          {loading ? 'Cargando...' : 'Cargar más'}
+        </h3>
+      }
+      {option===2 &&
+        (paintsByCategoryData.total_pages >= paintsByCategoryPage) &&
+        <h3 ref={loadMoreButtonRef} onClick={()=>{if(paintsByCategoryPage>0)getPaintsByCategory(selectedOption, paintsByCategoryPage)}} className='loadMore' disabled={loading}>
           {loading ? 'Cargando...' : 'Cargar más'}
         </h3>
       }

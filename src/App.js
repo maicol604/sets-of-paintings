@@ -23,7 +23,8 @@ function App() {
     const urls = [
       `${baseAPI}/environments?page=1`,
       `${baseAPI}/sets?page=1`,
-      `${baseAPI}/paintings?page=1`
+      `${baseAPI}/paintings?page=1`,
+      `${baseAPI}/paintings/categories`
     ]
     // call to API
     Promise.all(urls.map(url => fetch(url).then(res => res.json())))
@@ -34,7 +35,6 @@ function App() {
     //   return response.json();
     // })
     .then(data => {
-      console.log(data)
       setData({
         environments: data[0].data,
         sets: data[1].data,
@@ -42,6 +42,7 @@ function App() {
         environmentsMeta: data[0],
         setsMeta: data[1],
         paintingsMeta: data[2],
+        categories: data[3]
       })
       // setData(data);
       setLoading(false)
