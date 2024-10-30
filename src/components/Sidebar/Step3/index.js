@@ -258,9 +258,15 @@ function Step3() {
         </h3>
       }
       {option===2 &&
-        (paintsByCategoryData.total_pages >= paintsByCategoryPage) &&
+        paintsByCategoryData && (paintsByCategoryData.total_pages >= paintsByCategoryPage) &&
         <h3 ref={loadMoreButtonRef} onClick={()=>{if(paintsByCategoryPage>0)getPaintsByCategory(selectedOption, paintsByCategoryPage)}} className='loadMore' disabled={loading}>
           {loading ? 'Cargando...' : 'Cargar más'}
+        </h3>
+      }
+      {option===2 &&
+        !paintsByCategoryData &&
+        <h3 className='loadMore' disabled={loading}>
+          Cargando...
         </h3>
       }
     </div>
