@@ -188,11 +188,11 @@ function Step3() {
               onChange={handleChange}
               className='category-select'
             >
-              <option value={null}>Todas</option>
+              <option value={null}>CATEGORIAS</option>
               {
                 categories.map((item)=>{
                   return (
-                    <option value={item.slug} key={item.id}>{item.name}</option>
+                    <option value={item.slug} key={item.id}>{item.name.toUpperCase()}</option>
                   )
                 })
               }

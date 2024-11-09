@@ -3,6 +3,7 @@ import './styles.scss';
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import { useAppContext } from '../../../contexts/AppContext';
 import ImageLoader from '../../ImageLoader';
+import CustomTooltip from '../../CustomTooltip';
 
 function Step1() {
 
@@ -25,9 +26,10 @@ function Step1() {
   },[store.data])
 
   const handleEnviroment = (env) => {
+    if(enviromentSelected)
+      store.setSteps(prev=>({...prev, step1:false}));
     setEnviromentSelected(env);
     store.setEnviroment(env);
-    // console.log(env)
   }
 
   const nextEnvironmentsPage = (page) => {
@@ -59,6 +61,32 @@ function Step1() {
     <div className='env-container'>
       {
         enviroments.map((enviroment, enviromentIndex)=>(
+          enviromentIndex === 0 ?
+          // <CustomTooltip title="Selecciona un entorno y color de pared" open={store.steps.step1}>
+            <div className={'enviroment-card '+((enviromentSelected && enviromentSelected.id===enviroment.id)?"enviroment-active":"")} key={enviromentIndex+"-env"}>
+              <div className='image-color-list-container'>
+                <ul className='image-color-list'>
+                  {
+                    enviroment.colors.map((item, index) => (
+                      <li 
+                        className={"image-color "+((enviromentSelected && index===enviromentSelected.indexSelected && (enviromentSelected.id===enviroment.id))?"image-color-active":"")} 
+                        style={{backgroundColor: item}} 
+                        onClick={()=>handleEnviroment({...enviroment, indexSelected: index})}
+                        key={index}
+                      ></li>
+                    ))
+                  }
+                </ul>
+              </div>
+              <div className='img-wrapper' onClick={()=>handleEnviroment({...enviroment, indexSelected: 0})}>
+                <div className='check'>
+                  <CheckCircleSharpIcon/>
+                </div>
+                <ImageLoader src={enviroment.images[!enviromentSelected?0:((enviromentSelected.id===enviroment.id)?enviromentSelected.indexSelected:0)]} alt=""/>
+              </div>
+            </div>
+          // </CustomTooltip>
+          :
           <div className={'enviroment-card '+((enviromentSelected && enviromentSelected.id===enviroment.id)?"enviroment-active":"")} key={enviromentIndex+"-env"}>
             <div className='image-color-list-container'>
               <ul className='image-color-list'>

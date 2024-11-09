@@ -19,6 +19,12 @@ export const AppProvider = ({ children }) => {
   const [setsPage, setSetsPage] = useState(1);
   const [paintingsPage, setPaintingsPage] = useState(1);
   const [categories, setCategories] = useState([]);
+  const [steps, setSteps] = useState({
+    step1: true,
+    step2: true,
+    step3: true,
+    step4: true,
+  })
 
   const reset = () => {
     // setData(null)
@@ -55,7 +61,9 @@ export const AppProvider = ({ children }) => {
     paintingsPage,
     setPaintingsPage,
     categories, 
-    setCategories
+    setCategories,
+    steps, 
+    setSteps
   };
 
   return (
