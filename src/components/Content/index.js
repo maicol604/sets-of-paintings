@@ -36,10 +36,29 @@ const Content = () => {
     }
   };
 
+  const handleClick = (step) => {
+    if(step<=store.endStep) {
+      store.setCurrentStep(step)
+      return;
+    }
+    if(!!store.enviroment && step===1) {
+      store.setCurrentStep(1);
+      return;
+    }
+    if(store.set && step===2) {
+      store.setCurrentStep(2);
+      return;
+    }
+    if(store.set?.items_count===store.paints?.length && step===3) {
+      store.setCurrentStep(3);
+      return;
+    }
+  }
+
   return (
     <div className='content-wrapper'>
       <div className='counter-list'>
-        <div className={'counter-item '+(store.currentStep===0?"counter-item-active":"")}>
+        <div className={'counter-item '+(store.currentStep===0?"counter-item-active":"")} onClick={()=>handleClick(0)}>
           <div className='counter-item-icon'>
             {
               store.currentStep===0 ?
@@ -54,7 +73,7 @@ const Content = () => {
             <p>entorno</p>
           </div>
         </div>  
-        <div className={'counter-item '+(store.currentStep===1?"counter-item-active":"")}>
+        <div className={'counter-item '+(store.currentStep===1?"counter-item-active":"")} onClick={()=>handleClick(1)}>
           <div className='counter-item-icon'>
             {
               store.currentStep===1 ?
@@ -69,7 +88,7 @@ const Content = () => {
             <p>de cuadros</p>
           </div>
         </div>  
-        <div className={'counter-item '+(store.currentStep===2?"counter-item-active":"")}>
+        <div className={'counter-item '+(store.currentStep===2?"counter-item-active":"")} onClick={()=>handleClick(2)}>
           <div className='counter-item-icon'>
             {
               store.currentStep===2 ?
@@ -84,7 +103,7 @@ const Content = () => {
             <p>diseños</p>
           </div>
         </div>  
-        <div className={'counter-item '+(store.currentStep===3?"counter-item-active":"")}>
+        <div className={'counter-item '+(store.currentStep===3?"counter-item-active":"")} onClick={()=>handleClick(3)}>
           <div className='counter-item-icon'>
             {
               store.currentStep===3 ?

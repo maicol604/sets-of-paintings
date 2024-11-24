@@ -38,6 +38,7 @@ function Step2() {
     setEnviromentSelected(env);
     store.setSet(env);
     store.setPaints([]);
+    store.setEndStep(2)
   };
 
   const nextSetsPage = (page) => {

@@ -62,6 +62,10 @@ function Step1() {
     // console.log(store.downloadTrigger)
   },[store.downloadTrigger])
 
+  useEffect(()=>{
+    if(store.endStep<3)
+      store.setEndStep(3)
+  },[])
 
   return (
     <div className="final-image-container">

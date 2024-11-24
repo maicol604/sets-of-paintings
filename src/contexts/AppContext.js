@@ -24,7 +24,8 @@ export const AppProvider = ({ children }) => {
     step2: true,
     step3: true,
     step4: true,
-  })
+  }); 
+  const [endStep, setEndStep] = useState(0);
 
   const reset = () => {
     // setData(null)
@@ -33,6 +34,7 @@ export const AppProvider = ({ children }) => {
     setSet(null);
     setPaints([]);
     setPaintSelected(0);
+    setEndStep(0);
   }
 
   const value = {
@@ -63,7 +65,9 @@ export const AppProvider = ({ children }) => {
     categories, 
     setCategories,
     steps, 
-    setSteps
+    setSteps,
+    endStep,
+    setEndStep
   };
 
   return (

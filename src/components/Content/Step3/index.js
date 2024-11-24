@@ -65,6 +65,11 @@ const Step3 = () => {
     store.setPaintSelected(null);
   }
 
+  useEffect(()=>{
+    if(store.endStep<2)
+      store.setEndStep(2)
+  },[])
+
   return (
     <div className="editor-container">
       {
