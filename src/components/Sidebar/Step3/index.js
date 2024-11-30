@@ -47,7 +47,7 @@ function Step3() {
         setImages(store.paints)
       }
       if(store.categories){
-        setCategories(store.categories)
+        setCategories(store.categories.slice(0, -1))
       }
       setImages(imagesAux);
     }
@@ -118,10 +118,15 @@ function Step3() {
   const getPaintsByCategory = (category, page) => {
     setLoading(true);
     let aux = [];
+    let url =`${store.baseAPI}/paintings?page=${page}&category=${category}`;
     if(page>1) {
       aux = [...paintsByCategory];
     }
-    fetch(`${store.baseAPI}/paintings?page=${page}&category=${category}`)
+    if(category==='CATEGORIAS') {
+      url = `${store.baseAPI}/paintings?page=1`;
+    }
+
+    fetch(url)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');

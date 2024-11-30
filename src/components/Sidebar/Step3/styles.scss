@@ -47,10 +47,11 @@
             }
         }
     }
-    .category-select {
+    .category-select, .category-select:focus {
         background-color: transparent;
         border: none;
         font-size: .75rem;
+        color: #000 !important;
     }
 }
 @media (max-width: 992px) {
