@@ -186,7 +186,7 @@ function Step3() {
       <div className='paints-header'>
         <div onClick={() => setOption(0)}>TODOS</div>
         <div onClick={() => setOption(1)}>FAVORITOS {`(${favorites.length})`}</div>
-        <div>
+        <div onClick={() => setOption(2)}>
             {/* <label id="dropdown-label">CATEGORÍAS</label> */}
             <select
               value={selectedOption}
