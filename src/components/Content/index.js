@@ -1,7 +1,6 @@
 // components/Content.js
 import React from 'react';
 import { useAppContext } from '../../contexts/AppContext';
-import Grid from '@mui/material/Grid';
 import Step1 from './Step1'; 
 import Step2 from './Step2';
 import Step3 from './Step3';

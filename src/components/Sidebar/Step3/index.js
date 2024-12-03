@@ -11,6 +11,7 @@ function Step3() {
   const [images, setImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [favoritesList, setFavoritesList] = useState([]);
   const [option, setOption] = useState(0);
   const [loading, setLoading] = useState(false);
   const loadMoreButtonRef = useRef(null); // Ref para el botón "Cargar más"
@@ -83,7 +84,7 @@ function Step3() {
     localStorage.setItem('favorites', JSON.stringify(f));
   }
 
-  const handleFavorites = (paint) => {
+  const handleFavorite = (paint) => {
     manageFavorite(paint.id);
   };
 
@@ -146,6 +147,24 @@ function Step3() {
     });
   }
 
+  const getFavoritesPaints = (fav) => {
+    let url =`${store.baseAPI}/paintings/get_favorites?${fav}`;
+    setFavoritesList([]);
+    fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(newData => {
+      setFavoritesList(newData.data);
+    })
+    .catch(error => {
+      console.error('Hubo un problema con la solicitud fetch:', error);
+    });
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -181,11 +200,18 @@ function Step3() {
     setOption(2);
   };
 
+  const handleFavorites = () => {
+    const fav = favorites.length>0?'ids[]='+favorites.join('&ids[]='):'';
+    // console.log(favorites.join('&ids[]='))
+    setOption(1);
+    getFavoritesPaints(fav);
+  }
+
   return (
     <div className='paint-list-container'>
       <div className='paints-header'>
         <div onClick={() => setOption(0)}>TODOS</div>
-        <div onClick={() => setOption(1)}>FAVORITOS {`(${favorites.length})`}</div>
+        <div onClick={handleFavorites}>FAVORITOS {`(${favorites.length})`}</div>
         <div onClick={() => setOption(2)}>
             {/* <label id="dropdown-label">CATEGORÍAS</label> */}
             <select
@@ -212,7 +238,7 @@ function Step3() {
             {images.map((image, index) => (
               <Grid item xs={4} key={index}>
                 <div className='paint-wrapper'>
-                  <span className='favorites-container' onClick={() => handleFavorites(image)}>
+                  <span className='favorites-container' onClick={() => handleFavorite(image)}>
                     <Heart active={isFavorite(image.id)} />
                   </span>
                   <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
@@ -225,17 +251,17 @@ function Step3() {
           option === 1 
           &&
           <>
-            {images.map((image, index) => (
+            {favoritesList.map((image, index) => (
               isFavorite(image.id) ?
               <Grid item xs={4} key={index}>
                 <div className='paint-wrapper'>
-                  <span className='favorites-container' onClick={() => handleFavorites(image)}>
+                  <span className='favorites-container' onClick={() => handleFavorite(image)}>
                     <Heart active={isFavorite(image.id)} />
                   </span>
                   <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
                 </div>
               </Grid>
-              : null
+              :<></>
             ))}
           </>
         }
@@ -246,7 +272,7 @@ function Step3() {
             {paintsByCategory.map((image, index) => (
               <Grid item xs={4} key={index}>
                 <div className='paint-wrapper'>
-                  <span className='favorites-container' onClick={() => handleFavorites(image)}>
+                  <span className='favorites-container' onClick={() => handleFavorite(image)}>
                     <Heart active={isFavorite(image.id)} />
                   </span>
                   <ImageLoader className='img-list-item' src={image.image} alt="" onClick={() => handlePaint(image)} />
@@ -256,7 +282,7 @@ function Step3() {
           </>
         }
       </Grid>
-      {option!==2 &&
+      {(option!==2 && option!==1) &&
       store.data && (store.data.paintingsMeta.total_pages >= store.paintingsPage) &&
         <h3 ref={loadMoreButtonRef} onClick={nextPaintingsPage} className='loadMore' disabled={loading}>
           {loading ? 'Cargando...' : 'Cargar más'}
@@ -271,6 +297,11 @@ function Step3() {
       {option===2 &&
         !paintsByCategoryData &&
         <h3 className='loadMore' disabled={loading}>
+          Cargando...
+        </h3>
+      }
+      {option===1 && favoritesList.length===0 &&
+        <h3 className='loadMore'>
           Cargando...
         </h3>
       }
